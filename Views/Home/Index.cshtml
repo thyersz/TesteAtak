@@ -1,0 +1,70 @@
+﻿@{
+    ViewData["Title"] = "Home";
+}
+
+<div class="container">
+    <div class="text-center mt-5">
+        <h1 class="display-4 fw-bold text-primary">PROJETO F. AUGUSTO</h1>
+        
+        <div class="mt-4 mb-5">
+            <p class="lead">
+                Preparado para gerar dados com esse site? Faça seu login ou crie uma conta!
+            </p>
+        </div>
+
+        <div class="row justify-content-center mt-4">
+            <div class="col-md-6">
+                <div class="d-grid gap-3">
+                    @if (!User.Identity?.IsAuthenticated ?? true)
+                    {
+                        <a asp-controller="Account" asp-action="Login" class="btn btn-primary btn-lg">
+                            <i class="bi bi-box-arrow-in-right"></i> Fazer Login
+                        </a>
+                        <a asp-controller="Account" asp-action="Register" class="btn btn-outline-primary btn-lg">
+                            <i class="bi bi-person-plus"></i> Criar Conta
+                        </a>
+                    }
+                    else
+                    {
+                        <a asp-controller="Restricted" asp-action="Index" class="btn btn-success btn-lg">
+                            <i class="bi bi-gear"></i> Ir para Área Restrita
+                        </a>
+                    }
+                </div>
+            </div>
+        </div>
+
+        <div class="row justify-content-center mt-5">
+            <div class="col-md-8">
+                <div class="card bg-light">
+                    <div class="card-body">
+                        <h5 class="card-title">Recursos Disponíveis</h5>
+                        <div class="row mt-4">
+                            <div class="col-md-4">
+                                <div class="text-center mb-4">
+                                    <i class="bi bi-file-earmark-spreadsheet text-primary" style="font-size: 2rem;"></i>
+                                    <h6 class="mt-2">Geração de Planilhas</h6>
+                                    <p class="small text-muted">Gere dados aleatórios em formato Excel</p>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="text-center mb-4">
+                                    <i class="bi bi-shield-check text-primary" style="font-size: 2rem;"></i>
+                                    <h6 class="mt-2">Área Protegida</h6>
+                                    <p class="small text-muted">Acesso seguro aos seus dados</p>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="text-center mb-4">
+                                    <i class="bi bi-download text-primary" style="font-size: 2rem;"></i>
+                                    <h6 class="mt-2">Download Fácil</h6>
+                                    <p class="small text-muted">Baixe seus arquivos com um clique</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

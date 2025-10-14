@@ -1,0 +1,21 @@
+@{
+    ViewData["Title"] = "Área Restrita";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Sucesso!</h1>
+    <p class="lead text-success">Login/token funcionando corretamente!</p>
+    <p>Você está autenticado e tem acesso a esta área restrita.</p>
+    
+    <div class="mt-4">
+        <p>Suas informações:</p>
+        <p><strong>Nome:</strong> @User.Identity?.Name</p>
+        <p><strong>Email:</strong> @User.Claims.FirstOrDefault(c => c.Type == System.Security.Claims.ClaimTypes.Email)?.Value</p>
+    </div>
+
+    <div class="mt-5">
+        <a asp-controller="Generate" asp-action="Index" class="btn btn-primary btn-lg">
+            <i class="bi bi-file-earmark-spreadsheet"></i> Quero gerar meus dados
+        </a>
+    </div>
+</div>
