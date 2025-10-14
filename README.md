@@ -76,8 +76,3 @@ TesteAtak/
   - Datas de contratação
   - Endereços completos
 
-## 🤝 Como Contribuir
-Você pode contribuir enviando pull requests ou reportando problemas encontrados.
-
-## 📜 Licença
-Este projeto está licenciado sob a licença MIT.
