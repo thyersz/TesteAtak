@@ -19,9 +19,11 @@
                         <div class="form-group mb-3">
                             <label for="quantidade" class="form-label">Quantidade de registros:</label>
                             <input type="number" id="quantidade" name="quantidade" class="form-control" 
-                                   value="100" min="1" max="1000" required />
+                                   value="100" min="10" max="1000" required 
+                                   oninvalid="this.setCustomValidity('Por favor, insira um número entre 10 e 1000')"
+                                   oninput="this.setCustomValidity('')" />
                             <div class="form-text text-muted">
-                                Escolha quantos registros você deseja gerar (máximo 1000).
+                                Escolha quantos registros você deseja gerar (mínimo 10, máximo 1000).
                             </div>
                         </div>
 
@@ -33,11 +35,41 @@
                         </div>
 
                         <div class="d-grid gap-2">
-                            <button type="submit" class="btn btn-primary btn-lg">
+                            <button type="submit" id="btnGerar" class="btn btn-primary btn-lg">
                                 <i class="bi bi-file-earmark-excel"></i> Gerar Planilha Excel
                             </button>
                         </div>
                     </form>
+
+                    <script>
+                        document.getElementById('quantidade').addEventListener('input', function() {
+                            var valor = parseInt(this.value);
+                            var btnGerar = document.getElementById('btnGerar');
+                            var mensagem = document.getElementById('mensagemValidacao');
+                            
+                            if (valor < 10 || valor > 1000 || isNaN(valor)) {
+                                btnGerar.disabled = true;
+                                if (!mensagem) {
+                                    mensagem = document.createElement('div');
+                                    mensagem.id = 'mensagemValidacao';
+                                    mensagem.className = 'alert alert-warning mt-2';
+                                    this.parentNode.appendChild(mensagem);
+                                }
+                                mensagem.textContent = 'A quantidade deve ser entre 10 e 1000 registros.';
+                            } else {
+                                btnGerar.disabled = false;
+                                if (mensagem) {
+                                    mensagem.remove();
+                                }
+                            }
+                        });
+
+                        // Validação inicial ao carregar a página
+                        document.addEventListener('DOMContentLoaded', function() {
+                            var evento = new Event('input');
+                            document.getElementById('quantidade').dispatchEvent(evento);
+                        });
+                    </script>
 
                     @if (TempData["Message"] != null)
                     {

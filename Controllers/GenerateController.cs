@@ -33,6 +33,13 @@ namespace TesteAtak.Controllers
         [HttpPost]
         public async Task<IActionResult> GenerateExcel(int quantidade = 100, bool sendEmail = false)
         {
+            // Validação da quantidade de registros (mínimo 10, máximo 1000)
+            if (quantidade < 10 || quantidade > 1000)
+            {
+                TempData["Error"] = "A quantidade de registros deve ser entre 10 e 1000.";
+                return RedirectToAction("Index");
+            }
+
             // Solicita ao serviço a geração dos dados aleatórios
             var dados = _dataGeneratorService.GenerateRandomData(quantidade);
 
